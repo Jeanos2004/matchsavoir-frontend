@@ -74,5 +74,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
 });
 
 Button.displayName = "Button";
+ButtonLink.displayName = "ButtonLink";
 
 export { Button, ButtonLink, buttonVariants };
+export type { ButtonProps, ButtonLinkProps };

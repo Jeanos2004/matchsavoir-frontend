@@ -20,7 +20,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     // Vérifier si l'utilisateur vient de s'inscrire
-    const registered = searchParams.get('registered');
+    const registered = searchParams?.get('registered');
     if (registered === 'true') {
       setShowSuccessMessage(true);
       // Masquer le message après 5 secondes

@@ -1,9 +1,10 @@
 "use client";
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import LoginForm from '@/components/Login/LoginForm';
+import { Loader2 } from 'lucide-react';
 
 export default function ConnexionPage() {
   return (
@@ -50,7 +51,9 @@ export default function ConnexionPage() {
               </p>
             </div>
             
-            <LoginForm />
+            <Suspense fallback={<div className="flex items-center justify-center"><Loader2 className="h-6 w-6 animate-spin text-secondary" /></div>}>
+              <LoginForm />
+            </Suspense>
           </div>
         </div>
       </div>
