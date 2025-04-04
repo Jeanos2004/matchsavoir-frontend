@@ -37,17 +37,16 @@ interface ButtonBaseProps extends VariantProps<typeof buttonVariants> {
   className?: string;
 }
 
-export interface ButtonProps extends ButtonBaseProps {
+export interface ButtonProps extends ButtonBaseProps, React.HTMLAttributes<HTMLElement> {
   href?: string;
   children?: React.ReactNode;
   type?: 'submit' | 'reset' | 'button';
-  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
   disabled?: boolean;
 }
 
 const Button = React.forwardRef<HTMLElement, ButtonProps>((
-  { className, variant, size, asChild = false, href, children, ...props },
-  ref: any
+  { className, variant, size, asChild = false, href, children, ...props }: ButtonProps,
+  ref
 ) => {
   const Comp = asChild ? Slot : href ? "a" : "button";
   return (
@@ -60,7 +59,7 @@ const Button = React.forwardRef<HTMLElement, ButtonProps>((
       {children}
     </Comp>
   );
-}) as React.ForwardRefExoticComponent<ButtonProps & React.RefAttributes<HTMLElement>>;
+});
 
 Button.displayName = "Button";
 

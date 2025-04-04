@@ -20,7 +20,7 @@ interface Formation {
 }
 
 export default function TrouverFormateurPage() {
-  const [formations, setFormations] = useState<Formation[]>([
+  const [formations] = useState<Formation[]>([
     {
       id: 1,
       title: 'Formation Python Avancée',

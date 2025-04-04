@@ -3,7 +3,7 @@
 import { Button } from "./Button";
 
 interface CardProps {
-  key: any;
+  key: number | string;
   title: string;
   description: string;
   image: string;

@@ -24,7 +24,7 @@ export default function ConnexionPage() {
               </h1>
               
               <p className="text-gray-200 mb-2">
-                Connectez-vous pour accéder à votre espace personnel et retrouver vos formations ou vos apprenants. Découvrez une expérience d'apprentissage personnalisée.
+                Connectez-vous pour accéder à votre espace personnel et retrouver vos formations ou vos apprenants. Découvrez une expérience d&apos;apprentissage personnalisée.
               </p>
             </div>
             
