@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Button } from '../ui/Button';
+import { ButtonLink } from '../ui/Button';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,12 +29,12 @@ const Header = () => {
           </nav>
 
           <div className="hidden md:flex space-x-4 ">
-            <Button className='bg-[#e85d04]' variant="secondary" href="/connexion">
+            <ButtonLink className='bg-[#e85d04]' variant="secondary" href="/connexion">
               Connexion
-            </Button>
-            <Button className='hover:bg-[#e85d04] border-mg border-white ' href="/inscription">
+            </ButtonLink>
+            <ButtonLink className='hover:bg-[#e85d04] border-mg border-white ' href="/inscription">
               S&apos;inscrire
-            </Button>
+            </ButtonLink>
           </div>
 
           {/* Bouton menu mobile */}
@@ -85,12 +85,12 @@ const Header = () => {
                 Contactez-nous
               </Link>
               <div className="flex flex-col space-y-2 pt-2">
-                <Button variant="secondary" href="/connexion" className="w-full">
+                <ButtonLink variant="secondary" href="/connexion" className="w-full">
                   Connexion
-                </Button>
-                <Button href="/inscription" className="w-full">
+                </ButtonLink>
+                <ButtonLink href="/inscription" className="w-full">
                   S&apos;inscrire
-                </Button>
+                </ButtonLink>
               </div>
             </nav>
           </div>

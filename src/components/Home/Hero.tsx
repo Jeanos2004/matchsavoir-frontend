@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { Button } from '../ui/Button';
+import { ButtonLink } from '../ui/Button';
 
 const Hero = () => {
   return (
@@ -17,12 +17,12 @@ const Hero = () => {
               domaine? <span className="text-secondary font-medium">MatchSavoir</span> vous aide en toute simplicité.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button className='bg-[#e85d04] hover:shadow-lg' href="/trouver-formateur" size="lg" variant="secondary">
+              <ButtonLink className='bg-[#e85d04] hover:shadow-lg' href="/trouver-formateur" size="lg" variant="secondary">
                 Trouver mon formateur
-              </Button>
-              <Button href="/devenir-formateur" size="lg" variant="outline" className="border-white text-white hover:bg-[#e85d04] hover:border-[#e85d04] hover:shadow-lg">
+              </ButtonLink>
+              <ButtonLink href="/devenir-formateur" size="lg" variant="outline" className="border-white text-white hover:bg-[#e85d04] hover:border-[#e85d04] hover:shadow-lg">
                 Devenir formateur
-              </Button>
+              </ButtonLink>
             </div>
           </div>
           <div className="order-1 md:order-2 flex justify-center">

@@ -1,6 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
-import { Button } from '../ui/Button';
+import { ButtonLink } from '../ui/Button';
 
 const CTA = () => {
   return (
@@ -13,16 +12,14 @@ const CTA = () => {
           Rejoignez notre communauté de formateurs et d&apos;apprenants dès aujourd&apos;hui et transformez votre façon d&apos;apprendre.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Button asChild size="lg" className="bg-secondary hover:bg-secondary-light">
-            <Link href="/inscription">
-              Créer un compte
-            </Link>
-          </Button>
-          <Button asChild variant="outline" size="lg" className="hover:border-secondary-dark text-white hover:bg-secondary-dark">
-            <Link href="/formateurs">
-              Explorer les formateurs
-            </Link>
-          </Button>
+          
+          <ButtonLink href="/inscription" size="lg" className="bg-secondary hover:bg-secondary-light">
+            Créer un compte
+          </ButtonLink>
+          
+          <ButtonLink href="/formateurs" size="lg" className="hover:border-secondary-dark text-white hover:bg-secondary-dark">
+            Explorer les formateurs
+          </ButtonLink>
         </div>
       </div>
     </section>

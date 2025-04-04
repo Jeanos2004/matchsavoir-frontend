@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "./Button";
+import { ButtonLink } from "./Button";
 
 interface CardProps {
   key: number | string;
@@ -43,13 +43,13 @@ export function CardDemo({
 
           {/* Bouton - Utilisation de pointer-events-auto pour s'assurer qu'il est cliquable */}
           <div className="pointer-events-auto mt-4">
-            <Button
+            <ButtonLink
               href={buttonLink}
               variant={key === 1 ? 'secondary' : 'default'}
               className="bg-[#e85d04] hover:bg-[#ff6b0d] w-full justify-center transition-all duration-300 transform hover:translate-y-[-2px]"
             >
               {buttonText}
-            </Button>
+            </ButtonLink>
           </div>
         </div>
       </div>
