@@ -5,6 +5,7 @@ import SearchBar from './_components/SearchBar';
 import FilterPanel from './_components/FilterPanel';
 import FormationCard from './_components/FormationCard';
 import { Button } from '@/components/ui/Button';
+import { ChevronLeft, ChevronRight, GraduationCap } from 'lucide-react';
 
 interface Formation {
   id: number;
@@ -35,7 +36,7 @@ export default function TrouverFormateurPage() {
     },
     {
       id: 2,
-      title: 'Formation Python Avancée',
+      title: 'Formation JavaScript Avancée',
       instructor: 'Dr. Mamadou Diallo',
       price: 2000,
       duration: '60 jours',
@@ -103,44 +104,80 @@ export default function TrouverFormateurPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background-dark to-primary-900/90">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-center mb-8">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-primary-200">Trouvez</span>{' '}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-secondary-400 to-secondary-200">la formation</span>{' '}
-          <span className="text-white">qui vous convient le mieux</span>
-        </h1>
+    <div className="min-h-screen bg-motif relative overflow-hidden">
+      {/* Couches de fond */}
+      <div className="absolute inset-0 before:absolute before:inset-0 before:bg-gradient-to-b before:from-blue-950/90 before:via-indigo-950/80 before:to-[#070b14]/95 before:backdrop-blur-sm">
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
+      </div>
 
+      {/* Contenu */}
+      <div className="relative z-10 container mx-auto py-8 px-4 space-y-8">
+        {/* En-tête */}
+        <div className="text-center space-y-4">
+          <div className="inline-flex items-center justify-center space-x-2 bg-blue-500/10 px-4 py-2 rounded-full">
+            <GraduationCap className="w-5 h-5 text-blue-400" />
+            <span className="text-blue-400 font-medium">Trouvez votre formation idéale</span>
+          </div>
+          <h1 className="text-4xl font-bold text-white">
+            Découvrez nos formations
+          </h1>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Explorez notre sélection de formations de qualité et trouvez celle qui correspond à vos objectifs professionnels.
+          </p>
+        </div>
+
+        {/* Barre de recherche */}
         <SearchBar onSearch={handleSearch} />
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          <div className="lg:col-span-1">
+        {/* Contenu principal */}
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Panneau de filtres */}
+          <div className="w-full lg:w-1/4 lg:sticky lg:top-8 lg:h-fit">
             <FilterPanel onFilterChange={handleFilterChange} />
           </div>
-          <div className="lg:col-span-3">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          {/* Liste des formations */}
+          <div className="flex-1 space-y-8">
+            {/* En-tête des résultats */}
+            <div className="flex items-center justify-between">
+              <p className="text-gray-400">
+                {filteredFormations.length} formation{filteredFormations.length > 1 ? 's' : ''} trouvée{filteredFormations.length > 1 ? 's' : ''}
+              </p>
+            </div>
+
+            {/* Grille des formations */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {currentFormations.map((formation) => (
                 <FormationCard key={formation.id} formation={formation} />
               ))}
             </div>
+
+            {/* Pagination */}
             {totalPages > 1 && (
-              <div className="flex justify-center mt-8 gap-2">
+              <div className="flex justify-center gap-2">
                 <Button
                   onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                   disabled={currentPage === 1}
-                  variant="outline"
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white shadow-lg shadow-blue-500/20"
+                  size="lg"
                 >
+                  <ChevronLeft className="w-5 h-5 mr-1" />
                   Précédent
                 </Button>
-                <span className="flex items-center px-4 py-2 text-white bg-primary rounded">
-                  {currentPage} / {totalPages}
-                </span>
+                <div className="flex items-center px-4 py-2 rounded-lg bg-[#1a1e2e]/80 border border-[#2a3042]/50">
+                  <span className="text-gray-400">Page</span>
+                  <span className="text-white font-medium mx-2">{currentPage}</span>
+                  <span className="text-gray-400">sur {totalPages}</span>
+                </div>
                 <Button
                   onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                   disabled={currentPage === totalPages}
-                  variant="outline"
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white shadow-lg shadow-blue-500/20"
+                  size="lg"
                 >
                   Suivant
+                  <ChevronRight className="w-5 h-5 ml-1" />
                 </Button>
               </div>
             )}
