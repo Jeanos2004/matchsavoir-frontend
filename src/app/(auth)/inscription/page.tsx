@@ -7,7 +7,7 @@ import SignupForm from '@/components/SignUp/SignupForm';
 export default function InscriptionPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#1a1e2e] to-[#0f1219] p-4 md:p-8 flex items-center justify-center">
-      <div className="bg-[#0f1219]/80 backdrop-blur-sm shadow-2xl rounded-xl overflow-hidden border border-[#2a3042]/50 flex flex-col md:flex-row w-full max-w-6xl">
+      <div className="bg-[#0f1219]/80 backdrop-blur-sm shadow-2xl rounded-xl overflow-hidden border border-[#2a3042]/70 flex flex-col md:flex-row w-full max-w-6xl">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-blue-500/5 pointer-events-none" aria-hidden="true"></div>
         {/* Colonne de gauche - Texte et image */}
         <div className="md:w-1/2 relative min-h-[400px] md:min-h-[600px]">
