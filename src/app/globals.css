@@ -4,6 +4,31 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .glass-effect {
+    @apply bg-white/[0.07] backdrop-blur-[8px] border border-white/[0.1];
+  }
+
+  .glass-card {
+    @apply bg-black/30 backdrop-blur-md border border-white/[0.1] shadow-xl;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-secondary to-secondary-light;
+  }
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
