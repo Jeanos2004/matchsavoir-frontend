@@ -42,29 +42,42 @@ const SignupForm = () => {
     // Validation du prénom
     if (!formData.firstName.trim()) {
       newErrors.firstName = 'Le prénom est requis';
+    } else if (formData.firstName.length < 2) {
+      newErrors.firstName = 'Le prénom doit contenir au moins 2 caractères';
     }
     
     // Validation du nom
     if (!formData.lastName.trim()) {
       newErrors.lastName = 'Le nom est requis';
+    } else if (formData.lastName.length < 2) {
+      newErrors.lastName = 'Le nom doit contenir au moins 2 caractères';
     }
     
     // Validation de l'email
     if (!formData.email.trim()) {
       newErrors.email = "L'email est requis";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
       newErrors.email = "Format d'email invalide";
     }
     
     // Validation du mot de passe
     if (!formData.password) {
       newErrors.password = 'Le mot de passe est requis';
-    } else if (formData.password.length < 8) {
-      newErrors.password = 'Le mot de passe doit contenir au moins 8 caractères';
+    } else {
+      const passwordErrors = [];
+      if (formData.password.length < 8) passwordErrors.push('8 caractères minimum');
+      if (!/[A-Z]/.test(formData.password)) passwordErrors.push('une majuscule');
+      if (!/[a-z]/.test(formData.password)) passwordErrors.push('une minuscule');
+      if (!/[0-9]/.test(formData.password)) passwordErrors.push('un chiffre');
+      if (passwordErrors.length > 0) {
+        newErrors.password = `Le mot de passe doit contenir : ${passwordErrors.join(', ')}`;
+      }
     }
     
     // Validation de la confirmation du mot de passe
-    if (formData.password !== formData.confirmPassword) {
+    if (!formData.confirmPassword) {
+      newErrors.confirmPassword = 'La confirmation du mot de passe est requise';
+    } else if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = 'Les mots de passe ne correspondent pas';
     }
     
@@ -88,7 +101,7 @@ const SignupForm = () => {
     setErrors({});
     
     try {
-      await signup({
+      const response = await signup({
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
@@ -96,8 +109,28 @@ const SignupForm = () => {
         userType: formData.userType as 'apprenant' | 'formateur'
       });
       
-      // Redirection vers la page de connexion avec message de succès
-      router.push('/connexion?registered=true');
+      if (response.success) {
+        // Réinitialiser le formulaire
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+          userType: 'apprenant',
+          acceptTerms: false
+        });
+        
+        // Redirection vers la page de connexion avec message de succès
+        router.push('/connexion?registered=true');
+      } else {
+        // Gestion des erreurs spécifiques de l'API
+        if (response.message?.toLowerCase().includes('email')) {
+          setErrors(prev => ({ ...prev, email: 'Cet email est déjà utilisé' }));
+        } else {
+          setErrors(prev => ({ ...prev, form: response.message || 'Une erreur est survenue' }));
+        }
+      }
     } catch (error) {
       setErrors({
         form: error instanceof Error ? error.message : "Une erreur est survenue lors de l'inscription"

@@ -26,12 +26,12 @@ const Hero = () => {
             </div>
           </div>
           <div className="order-1 md:order-2 flex justify-center">
-            <div className="relative w-full max-w-md h-[300px] md:h-[400px]">
+            <div className="relative w-full h-[100%] md:h-[400px]">
               <Image 
                 src="/images/hero-image.png" 
                 alt="MatchSavoir - Mise en relation formateurs et apprenants" 
                 fill
-                style={{ objectFit: 'contain' }}
+                style={{ objectFit: 'cover' }}
                 priority
               />
             </div>

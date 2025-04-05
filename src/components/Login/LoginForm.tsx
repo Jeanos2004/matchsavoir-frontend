@@ -54,13 +54,15 @@ const LoginForm = () => {
     // Validation de l'email
     if (!formData.email.trim()) {
       newErrors.email = 'L\'email est requis';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
       newErrors.email = 'Format d\'email invalide';
     }
     
     // Validation du mot de passe
     if (!formData.password) {
       newErrors.password = 'Le mot de passe est requis';
+    } else if (formData.password.length < 8) {
+      newErrors.password = 'Le mot de passe doit contenir au moins 8 caractères';
     }
     
     setErrors(newErrors);
@@ -78,21 +80,40 @@ const LoginForm = () => {
     setErrors({});
     
     try {
-      await login({
+      const response = await login({
         email: formData.email,
         password: formData.password,
         rememberMe: formData.rememberMe
       });
       
-      setShowSuccessMessage(true);
-      
-      // Redirection vers le tableau de bord après un court délai
-      setTimeout(() => {
-        router.push('/dashboard');
-      }, 1500);
+      if (response.success) {
+        setShowSuccessMessage(true);
+        
+        // Réinitialiser le formulaire
+        setFormData({
+          email: '',
+          password: '',
+          rememberMe: formData.rememberMe
+        });
+        
+        // Redirection vers le tableau de bord après un court délai
+        setTimeout(() => {
+          router.push('/dashboard');
+        }, 1500);
+      } else {
+        // Gestion des erreurs spécifiques
+        if (response.message?.toLowerCase().includes('mot de passe')) {
+          setErrors(prev => ({ ...prev, password: 'Mot de passe incorrect' }));
+        } else if (response.message?.toLowerCase().includes('email')) {
+          setErrors(prev => ({ ...prev, email: 'Email non reconnu' }));
+        } else {
+          setErrors(prev => ({ ...prev, form: response.message || 'Une erreur est survenue' }));
+        }
+      }
     } catch (error) {
+      console.error('Erreur lors de la connexion:', error);
       setErrors({
-        form: error instanceof Error ? error.message : 'Une erreur est survenue lors de la connexion'
+        form: 'Une erreur est survenue lors de la connexion. Veuillez réessayer plus tard.'
       });
     } finally {
       setIsSubmitting(false);
