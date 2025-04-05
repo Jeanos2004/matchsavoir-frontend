@@ -7,8 +7,8 @@ import { Loader2 } from 'lucide-react';
 
 export default function ConnexionPage() {
   return (
-    <div className="container">
-      <div className="bg-[#0f1219] shadow-xl rounded-lg overflow-hidden border border-[#2a3042] flex flex-col md:flex-row max-w-6xl mx-auto">
+    <div className="">
+      <div className="bg-[#0f1219] shadow-xl rounded-lg overflow-hidden border border-[#2a3042] flex flex-col md:flex-row">
         {/* Colonne de gauche - Texte et image */}
         <div className="md:w-1/2 flex flex-col bg-motif text-white">
             
