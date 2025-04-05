@@ -17,10 +17,10 @@ const Header = () => {
 
           {/* Navigation pour desktop */}
           <nav className="hidden md:flex items-center space-x-6">
-            <Link href="#formation" className="text-sm hover:text-secondary transition-colors">
+            <Link href="/trouver-formateur" className="text-sm hover:text-secondary transition-colors">
               Formation
             </Link>
-            <Link href="/formateur" className="text-sm hover:text-secondary transition-colors">
+            <Link href="/trouver-formateur" className="text-sm hover:text-secondary transition-colors">
               Formateurs
             </Link>
             <Link href="#contact" className="text-sm hover:text-secondary transition-colors">
